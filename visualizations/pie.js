@@ -53,9 +53,43 @@ var arcs = canvas.selectAll("g")
     .append("g")
     .attr("transform", "translate(225, 225)");
 
-arcs.append("path")
+var selectedType = null;
+
+var bloodSlice = arcs.append("path")
     .attr("class", "bloodSlice")
     .attr("fill", function(d) {
         return colorMap[d.data.type];
     })
-    .attr("d", arc);
+    .attr("d", arc)
+    .style("cursor", "pointer");
+
+
+arcs.append("text")
+    .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+    .attr("dy", ".30em")
+    .text(function(d) { return d.data.percentage + "%"; })
+    .style("font-size", 8);
+
+console.log("implementing clicks");
+bloodSlice.on("click", function(clickedSlice) {
+    if (selectedType != clickedSlice.data.type) {
+        selectedType = clickedSlice.data.type;
+        bloodSlice.style("opacity", function(d) {
+            return (clickedSlice.data.type === d.data.type) ? 1 : 0.2;
+        })
+        console.log("trying to dim");
+        d3.selectAll(".cell").style("opacity", function(d) {
+                console.log("Dimming")
+                if (clickedSlice.data.type === d.donor || clickedSlice.data.type === d.recipient) {
+                    //console.log("Dimming");
+                    return 1;
+                } else {
+                    return 0.2;
+                }
+            })
+    } else {
+        selectedType = null;
+        bloodSlice.style("opacity", 1);
+        d3.selectAll(".cell").style("opacity", 1);
+    }
+});
