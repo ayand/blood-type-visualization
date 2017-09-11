@@ -9,7 +9,7 @@ var bloodPercentages = [
   { "type": "AB-", "percentage": 1 },
 ]
 
-var colorMap = {
+colorMap = {
     "O+": "#FF7F00",
     "A+": "#FDBF6F",
     "B+": "#E31A1C",
@@ -24,17 +24,18 @@ bloodPercentages.sort(function(a, b) {
     return b.percentage - a.percentage;
 })
 
+var width = 450
+
 var canvas = d3.select(".mainVis")
         .append("svg")
-        .attr("width", 450)
-        .attr("height", 450)
-
+        .attr("width", width)
+        .attr("height", width)
 
 canvas.append("rect")
     .attr("x", 0)
     .attr("y", 0)
-    .attr("width", 450)
-    .attr("height", 450)
+    .attr("width", width)
+    .attr("height", width)
     .attr("fill", "white")
 
 var bloodPie = d3.pie()
@@ -44,16 +45,36 @@ var bloodPie = d3.pie()
     })
 
 var arc = d3.arc()
-    .outerRadius(225)
-    .innerRadius(175)
+    .outerRadius(((width/2)))
+    .innerRadius(((width/2) - 50))
 
 var arcs = canvas.selectAll("g")
     .data(bloodPie(bloodPercentages))
     .enter()
     .append("g")
-    .attr("transform", "translate(225, 225)");
+    .attr("transform", "translate(" + (width / 2) + ", " + (width / 2) + ")");
 
-var selectedType = null;
+selectedType = null;
+div1 = document.getElementById("generalStats");
+div2 = document.getElementById("ethnicDistributions");
+
+div2.style.display = 'none';
+
+var showEthnicStats = function() {
+    console.log('button 1');
+    div1.style.display = 'none';
+    div2.style.display = 'block';
+    selectedType = null;
+
+    d3.selectAll(".bloodSlice").transition().duration(1000).style("opacity", 1);
+    d3.selectAll(".cell").transition().duration(1000).style("opacity", 1);
+}
+
+var showGeneralStats = function() {
+    console.log('button 2');
+    div1.style.display = 'block';
+    div2.style.display = 'none';
+}
 
 var bloodSlice = arcs.append("path")
     .attr("class", "bloodSlice")
@@ -74,11 +95,11 @@ console.log("implementing clicks");
 bloodSlice.on("click", function(clickedSlice) {
     if (selectedType != clickedSlice.data.type) {
         selectedType = clickedSlice.data.type;
-        bloodSlice.style("opacity", function(d) {
+        bloodSlice.transition().duration(1000).style("opacity", function(d) {
             return (clickedSlice.data.type === d.data.type) ? 1 : 0.2;
         })
         console.log("trying to dim");
-        d3.selectAll(".cell").style("opacity", function(d) {
+        d3.selectAll(".cell").transition().duration(1000).style("opacity", function(d) {
                 console.log("Dimming")
                 if (clickedSlice.data.type === d.donor || clickedSlice.data.type === d.recipient) {
                     //console.log("Dimming");
@@ -87,9 +108,15 @@ bloodSlice.on("click", function(clickedSlice) {
                     return 0.2;
                 }
             })
+
+        d3.selectAll(".legendItemRect").transition().duration(1000).style("opacity", function(rect) {
+            console.log("Rectangle dimming!");
+            return (rect.type === clickedSlice.data.type) ? 1 : 0.2;
+        })
     } else {
         selectedType = null;
         bloodSlice.style("opacity", 1);
-        d3.selectAll(".cell").style("opacity", 1);
+        d3.selectAll(".cell").transition().duration(1000).style("opacity", 1);
+        d3.selectAll(".legendItemRect").transition().duration(1000).style("opacity", 1);
     }
 });

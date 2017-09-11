@@ -5,7 +5,41 @@
     </head>
     <body>
         <h1 align="center">Blood Types</h1>
-        <div class="row">
+        <div align="center" class="row">
+          <div class="col-md-12">
+            <div align="center" class="bloodLegend">
+            </div>
+            <br>
+            <div align="center">
+              <label class="btn btn-danger" onclick="showGeneralStats()">Blood Type Distribution and Donation Statistics</label>
+              <label class="btn btn-success" onclick="showEthnicStats()">Type Distribution Among Ethnicities</label>
+            </div>
+          </div>
+        </div>
+        <div class="row" id="ethnicDistributions">
+            <h2 align="center">Type Distributions by Ethnicity</h2>
+            <div class="col-md-3">
+                <h3 align="center">Caucasian</h3>
+                <div align="center" class="ethnicity0">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <h3 align="center">African-American</h3>
+                <div align="center" class="ethnicity1">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <h3 align="center">Latino-American</h3>
+                <div align="center" class="ethnicity2">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <h3 align="center">Asian</h3>
+                <div align="center" class="ethnicity3">
+                </div>
+            </div>
+        </div>
+        <div class="row" id="generalStats">
           <div class="col-md-6">
             <br>
             <h2 align="center">Blood Type Distributions</h2>
@@ -13,8 +47,6 @@
             <div align="center" class="mainVis">
             </div>
             <br>
-            <div align="center" class="bloodLegend">
-            </div>
           </div>
           <div class="col-md-6">
             <br>
@@ -26,6 +58,7 @@
         <script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="visualizations/pie.js"></script>
         <script src="visualizations/donorChart.js"></script>
+        <script src="visualizations/ethnic_distributions.js"></script>
         <script src="visualizations/bloodLegend.js"></script>
     </body>
 </html>

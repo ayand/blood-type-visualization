@@ -80,8 +80,8 @@ var y = d3.scaleBand().range([width - padding, padding])
 
 var canvas = d3.select(".donorChart")
         .append("svg")
-        .attr("width", 450)
-        .attr("height", 450)
+        .attr("width", width)
+        .attr("height", width)
 
 var xAxis = d3.axisBottom(x);
 var yAxis = d3.axisLeft(y);
