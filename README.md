@@ -7,6 +7,7 @@ One can also switch to another view which shows the distribution of blood types 
 Information about the blood type distribution and donation combinations was acquired from:
 
 https://www.infoplease.com/science-health/health/blood-types
+
 http://www.redcrossblood.org/learn-about-blood/blood-types.html
 
 Note: The percentages for the different ethnicities in the second link don't necessarily add up to 100% due to discrepancy.
