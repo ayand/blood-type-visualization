@@ -10,14 +10,14 @@ var bloodPercentages = [
 ]
 
 colorMap = {
-    "O+": "#FF7F00",
-    "A+": "#FDBF6F",
-    "B+": "#E31A1C",
-    "O-": "#FB9A99",
-    "A-": "#33A02C",
-    "AB+": "#B2DF8A",
-    "B-": "#1F89B4",
-    "AB-": "#A6CEE3"
+    "O+": "#8DD3C7",
+    "A+": "#FFFFB3",
+    "B+": "#BEBADA",
+    "O-": "#FB8072",
+    "A-": "#377EB8",
+    "AB+": "#FDB462",
+    "B-": "#B3DE69",
+    "AB-": "#FCCDE5"
 }
 
 bloodPercentages.sort(function(a, b) {
@@ -36,7 +36,7 @@ canvas.append("rect")
     .attr("y", 0)
     .attr("width", width)
     .attr("height", width)
-    .attr("fill", "white")
+    .attr("fill", "#AAAAAA")
 
 var bloodPie = d3.pie()
     .value(function(d) {

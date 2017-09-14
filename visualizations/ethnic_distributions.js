@@ -16,7 +16,7 @@ var drawDistribution = function(index, data) {
         .attr("width", ethnicWidth)
         .attr("x", 0)
         .attr("y", 0)
-        .attr("fill", "white");
+        .attr("fill", "#AAAAAA");
 
     data.sort(function(a, b) {
         return b.percentage - a.percentage;
